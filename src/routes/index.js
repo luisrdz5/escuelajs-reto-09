@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
-//const ProductService = require('../services');
 const ProductService = require('../services/products')
 const receipt = '../assets/receipt.pdf'
+const bodyParser = require('body-parser');
 
 const platziStore = (app) => {
   const router = express.Router();
+  app.use(bodyParser.json());
   app.use('/api/', router);
 
   const productService = new ProductService();
@@ -32,6 +33,88 @@ const platziStore = (app) => {
     }
 
   });
+  router.get('/products/:productId',  async function(req, res, next) {
+      const { productId } = req.params;
+      try {
+        const products = await productService.getProduct({ productId });
+
+        res.status(200).json({
+          data: products,
+          message: 'product retrieved'
+        });
+      } catch (err) {
+        next(err);
+      }
+    }
+  );
+  router.delete('/products/:productId', async function(req, res, next) {
+    const { productId } = req.params;
+    try {
+      const deletedProductId = await productService.deleteProduct({ productId });
+      res.status(200).json({
+        data: deletedProductId,
+        message: 'movie deleted'
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+  router.post('/products', async function(req, res, next) {
+    const { body: product } = req;
+    try {
+      const createdProductId = await productService.createProduct({ product });
+
+      res.status(201).json({
+        data: createdProductId,
+        message: 'product created'
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+  router.put('/products/:productId',async function(req, res, next) {
+    console.log('entro al put');
+      const { productId } = req.params;
+      const { body: product } = req;
+      console.log(productId);
+      console.log(product);
+      try {
+        const updatedProductId = await productService.updateProduct({
+          productId,
+          product
+        });
+
+        res.status(200).json({
+          data: updatedProductId,
+          message: 'Product updated'
+        });
+      } catch (err) {
+        next(err);
+      }
+    }
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
