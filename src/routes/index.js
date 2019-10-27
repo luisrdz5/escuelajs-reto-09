@@ -53,7 +53,7 @@ const platziStore = (app) => {
       const deletedProductId = await productService.deleteProduct({ productId });
       res.status(200).json({
         data: deletedProductId,
-        message: 'movie deleted'
+        message: 'product deleted'
       });
     } catch (err) {
       next(err);
@@ -74,11 +74,8 @@ const platziStore = (app) => {
     }
   });
   router.put('/products/:productId',async function(req, res, next) {
-    console.log('entro al put');
       const { productId } = req.params;
       const { body: product } = req;
-      console.log(productId);
-      console.log(product);
       try {
         const updatedProductId = await productService.updateProduct({
           productId,

@@ -43,6 +43,30 @@ const productsMock = [
   },
 ];
 
+function filteredProductsMocks(tag){
+  return productsMock.filter(product => product.tags.includes(tag));
+}
+
+class ProductsServiceMock {
+  async getProducts() {
+    return Promise.resolve(productsMock);
+  }
+  async createProduct() {
+    return Promise.resolve(productsMock[0].id);
+  }
+  async getProduct() {
+    return Promise.resolve(productsMock[0]);
+  }
+  async updateProduct() {
+    return Promise.resolve(productsMock[0].id);
+  }
+  async deleteProduct() {
+    return Promise.resolve(productsMock[0].id);
+  }
+}
+
 module.exports = {
-  productsMock
+  productsMock,
+  ProductsServiceMock,
+  filteredProductsMocks
 };
