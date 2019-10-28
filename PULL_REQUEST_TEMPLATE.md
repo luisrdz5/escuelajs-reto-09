@@ -12,5 +12,8 @@ Usuario Platzi:th3_bu6
 ## Reto:
   - [X] Primer problema
   - [X] Segundo problema
-  - [] Tercer problema
+  - [X] Tercer problema
   
+ ## Api en now.sh
+ https://reto9.luisrdz5.now.sh/
+ https://reto9.luisrdz5.now.sh/API/products

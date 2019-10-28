@@ -9,7 +9,7 @@ const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.d
 
 class MongoConnect {
   constructor() {
-    this.client = new MongoClient(MONGO_URI, { useUnifiedTopology: true }, { useNewUrlParser: true });
+    this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true ,useUnifiedTopology: true});
     this.dbName = DB_NAME;
   }
   connect() {
